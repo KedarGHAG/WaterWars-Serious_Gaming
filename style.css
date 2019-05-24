@@ -1,0 +1,195 @@
+body
+{	width:90%;
+    /*background-image: url("images/bk/bk.jpg");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    vertical-align: middle;
+    background-color: skyblue;
+	margin:auto; /*The 'auto' margin centres the content*/
+	font-family:"Consolas";
+}
+	
+h2
+{	font-size:16pt;
+	font-weight:bold;
+}
+
+#header
+{	
+	padding: 3px;
+ 	color: darkgreen;
+	text-align:center;
+ 	font-size: 24pt;
+ 	font-weight:bold;
+	font-family:"Consolas";
+ }
+
+#footer
+{	width:80%;
+	padding:5px;   
+	display:block;
+	background-color:darkgreen;
+	color:white;  
+}
+ 
+#copyrightfooter
+{	width:100%; 
+	padding:0.5px; 
+	display:block;
+	background-color:#ff3796;
+	color:white;
+}
+
+#roundname
+{	font-weight:bold;
+	color:darkblue;
+	font-size:50px;
+}
+
+ #nav
+{ 	width:80%;
+ 	background-color:gainsboro;
+ 	color:blue;
+}
+
+.active
+{ 	background-color: lawngreen;
+ 	color:white;
+	font-weight:bold;
+}
+
+ #content
+{   /*position:fixed;*/
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+ #content-header
+{ 	/*position:fixed;*/
+ 	background-color:#ff3796;
+ 	color:white;
+}
+
+ #scorecard
+{   /*position:fixed;*/
+    background-color:#ff3796;
+    color:white;
+}
+
+ #content-left
+{ 	/*position:fixed;*/
+	width:20%;
+ 	display:inline-block;
+ 	background-color: #EBF7E3;
+ 	vertical-align: top;
+    opacity: 0.6;
+ 	padding:5px;
+	text-align:center;
+}
+
+ #content-right
+{   
+    background-image: url("images/bk/bk4_edited.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 12pt;
+    width: 78%;
+    height: 1200px;
+ 	display:inline-block;
+}
+ 
+#content-social
+{ 	position:relative;
+ 	padding:5px;
+	top:50px;
+}
+ 
+#map_canvas
+{  
+    width: 100%;
+}
+
+/*FOR THE BUTTON*/
+.runbutton {
+    background-color: #302387; /* Green */
+    border: none;
+    color: white;
+	font-family:"Consolas";
+	font-weight:bold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+	border-radius: 12px;
+    opacity: 0.8;
+}
+
+.runbutton:hover {
+    opacity: 1;
+}
+
+.howbutton {
+    background-color: #302387; /* Green */
+    border: none;
+    color: white;
+	font-family:"Consolas";
+	font-weight:bold;
+    padding: 10px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+	border-radius: 8px;
+    opacity: 0.5;
+}
+
+.howbutton:hover {
+    opacity: 0.7;
+}
+ 
+
+/* FOR SLIDERS*/
+.slidecontainer {
+    width: 80%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 70%;
+    height: 10px;
+    border-radius: 5px;   
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.8;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 60%; 
+    background: #00faac;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 60%;
+    background: #00faac;
+    cursor: pointer;
+}
+
+#wholepage{
+    width: 1300px;
+    margin-right: auto;
+    margin-left: auto;
+}

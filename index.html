@@ -1,0 +1,1011 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.0 Transitional//EN">
+<html>
+<head>
+	<title>WATER WAR by WSE/HI Dev Team</title>
+	<embed src="sound.mp3" autostart="true" hidden="true" loop="true"></embed>
+	<meta name="Generator" content="Alleycode HTML Editor">
+	<meta name="Description" content="Your description here...">
+	<meta name="Keywords" content="Your keywords here...">
+	
+	<!--JS SCRIPT-->
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="js/liquidFillGauge2.js"></script>
+	<script src="js/waterwar.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>-->
+	<!--STYLESHEETS-->
+	<link rel="stylesheet" type="text/css" href="style.css"></link>
+	<!--<link rel="stylesheet" href="css/demo1.css" rel='stylesheet' type='text/css'></link>-->
+
+</head>
+
+<body>
+<div id="wholepage">
+	<!-- Table for title -->
+	<div id="header">
+		<img alt="GAMENAME" height="61" src="images/WATER-WAR.png"><!--THE WATER WAR-->
+	</div>
+
+	<!-- TABLE FOR ROUND NUMBER AND POINTS -->
+	<div id="content-header">
+		
+	</div>
+
+	<div>
+	<!-- Table for input -->
+			<div id="content-left" class="slidecontainer">
+			
+			
+			<table>
+					<tr>
+						<h3>Weir level</h3>
+						At Shangri-La Farm: <span id="val_QFarm1" style="color:darkblue;font-weight:bold"></span>%<br>
+						0<input type="range" min="0" max="100" name="QFarm1Slider" value="50" class="slider" id="QFarm1">100
+						<br><br>
+						At Zootopia City: <span id="val_QCity1" style="color:darkblue;font-weight:bold"></span>%<br>
+						0<input type="range" min="0" max="100" name="QCity1Slider" value="50" class="slider" id="QCity1">100
+						<br><br>
+						At Farhampton Farm: <span id="val_QFarm2" style="color:darkblue;font-weight:bold"></span>%<br>
+						0<input type="range" min="0" max="100" name="QFarm2Slider" value="50" class="slider" id="QFarm2">100
+						<br><br>
+						At Smallville Farm: <span id="val_QFarm3" style="color:darkblue;font-weight:bold"></span>%<br>
+						0<input type="range" min="0" max="100" name="QFarm3Slider" value="50" class="slider" id="QFarm3">100
+						<br><br>
+						At Atlantis City: <span id="val_QCity2" style="color:darkblue;font-weight:bold"></span>%<br>
+						0<input type="range" min="0" max="100" name="QCity2Slider" value="50" class="slider" id="QCity2">100
+						<br><br><br>
+						<button id ="runbutton" type="button" class="runbutton" onclick="Simulate()" >Let the water flow!</button><br /><br/>
+						<button id ="howbutton" type="button" class="howbutton" onclick="howTo()" >How to play?</button><br /><br/>
+					</tr>
+					<tr>
+						<h3>::::::::::::::::::::::::</h3>
+						<h3>Monthly water requirements</h3>
+					</tr>
+					<table style="width:100%" border="0">
+						<tr bgcolor="lightgrey">
+							<td>
+							Locations
+							</td>
+							<td>
+							M1
+							</td>
+							<td>
+							M2
+							</td>
+							<td>
+							M3
+							</td>
+							<td>
+							Sum
+							</td>
+						</tr>
+						<tr>
+							<td>
+							Shangri-La
+							</td>
+							<td>
+							10
+							</td>
+							<td>
+							12
+							</td>
+							<td>
+							8
+							</td>
+							<td>
+							30
+							</td>
+						</tr>
+						<tr>
+							<td>
+							Zootopia
+							</td>
+							<td>
+							5
+							</td>
+							<td>
+							5
+							</td>
+							<td>
+							5
+							</td>
+							<td>
+							15
+							</td>
+						</tr>
+						<tr>
+							<td>
+							Farhampton
+							</td>
+							<td>
+							8
+							</td>
+							<td>
+							10
+							</td>
+							<td>
+							6
+							</td>
+							<td>
+							24
+							</td>
+						</tr>
+						<tr>
+							<td>
+							Smallville
+							</td>
+							<td>
+							11
+							</td>
+							<td>
+							11
+							</td>
+							<td>
+							9
+							</td>
+							<td>
+							31
+							</td>
+						</tr>
+						<tr>
+							<td>
+							Atlantis
+							</td>
+							<td>
+							7
+							</td>
+							<td>
+							7
+							</td>
+							<td>
+							7
+							</td>
+							<td>
+							21
+							</td>
+						</tr>
+					</table>
+					<tr>
+						<h3>::::::::::::::::::::::::</h3>
+						<h3>Past average monthly flow</h3>
+					</tr>
+					<table style="width:100%" border="0">
+						<tr bgcolor="lightgrey">
+							<td>
+							M1
+							</td>
+							<td>
+							M2
+							</td>
+							<td>
+							M3
+							</td>
+						</tr>
+						<tr>
+							<td>
+							46
+							</td>
+							<td>
+							50
+							</td>
+							<td>
+							40
+							</td>
+						</tr>
+				</table>
+				<tr>
+					<h3>::::::::::::::::::::::::</h3>
+					<h3>Flow information</h3>
+					Total seasonal flow: <span id="flow" style="color:darkblue;font-weight:bold"></span><br>
+					Flow in Month 1: <span id="flow1" style="color:darkblue;font-weight:bold"></span><br>
+					Flow in Month 2: <span id="flow2" style="color:darkblue;font-weight:bold"></span><br>
+					Flow in Month 3: <span id="flow3" style="color:darkblue;font-weight:bold"></span><br><br><br>
+				</tr>
+			</table>
+			</div>
+				<!-- function of sliders -->
+				<script>
+				var slider1 = document.getElementById("QFarm1");
+				var output1 = document.getElementById("val_QFarm1");
+				output1.innerHTML = slider1.value;
+				slider1.oninput = function() {
+				  output1.innerHTML = this.value;
+				}
+				var slider2 = document.getElementById("QCity1");
+				var output2 = document.getElementById("val_QCity1");
+				output2.innerHTML = slider2.value;
+				slider2.oninput = function() {
+				  output2.innerHTML = this.value;
+				}
+				var slider3 = document.getElementById("QFarm2");
+				var output3 = document.getElementById("val_QFarm2");
+				output3.innerHTML = slider3.value;
+				slider3.oninput = function() {
+				  output3.innerHTML = this.value;
+				}
+				var slider4 = document.getElementById("QFarm3");
+				var output4 = document.getElementById("val_QFarm3");
+				output4.innerHTML = slider4.value;
+				slider4.oninput = function() {
+				  output4.innerHTML = this.value;
+				}
+				var slider5 = document.getElementById("QCity2");
+				var output5 = document.getElementById("val_QCity2");
+				output5.innerHTML = slider5.value;
+				slider5.oninput = function() {
+				  output5.innerHTML = this.value;
+				}
+				</script>
+				
+				<!-- Function for HOWTO button -->
+				<script>
+				function howTo() {
+					alert("1. Know how much water is needed for your location by checking Monthly water requirements and Past average monthly flow (unfortunately, the future inflow is unpredictable).\n2. Adjust the slider of each location and press the button Let the water flow!.\n\nThe aim is to maximise Net Benefit of all locations!");
+				}
+				</script>
+			
+			<!-- Table for MAP and WATER ALLOCATION -->			
+			<div id="content-right" align="center">
+					<table id="scorecard" style="width: 100%">
+						<tr>
+							<td align="center">
+							<H2>Round<br><span id="round" class="roundname"></span></H2></td>
+							<td align="center">Shangri-La<br><span id="cbenefit1" style="color:white;font-weight:bold"></span> SKYCOIN</td><!-- Farm1 -->
+							<td align="center">Zootopia<br><span id="cbenefit2" style="color:white;font-weight:bold"></span> SKYCOIN</td><!-- City1 -->
+							<td align="center">Farhampton<br><span id="cbenefit3" style="color:white;font-weight:bold"></span> SKYCOIN</td><!-- Farm2 -->
+							<td align="center">Smallville<br><span id="cbenefit4" style="color:white;font-weight:bold"></span> SKYCOIN</td><!-- Farm3 -->
+							<td align="center">Atlantis<br><span id="cbenefit5" style="color:white;font-weight:bold"></span> SKYCOIN</td><!-- City2 -->
+						</tr>
+					</table>
+			<h1>THE WESTEROS BASIN</h1>
+				<table align="center" width="100%" style="height: 95%">
+					<tr>
+						<td style="height: 150px"><img id="weatherImage" src="" width="120px"></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<!-- Inflow and Shangri-La Farm -->		
+					<tr>
+						<td id="output-canvas0" align="left"><b>Inflow</b><br>
+						Type: <span id="weather" style="color:darkblue;font-weight:bold"></span><br></td>
+						<td></td>
+						<td id="output-canvas1" align="left"><b>Shangri-La Farm</b><br>
+						Total cost: <span id="tc1123" style="color:darkblue;font-weight:bold"></span><br>
+						Total benefit: <span id="tb1123" style="color:darkblue;font-weight:bold"></span><br>
+						Net benefit: <span id="nb1123" style="color:darkblue;font-weight:bold"></span><br>
+						</td>	
+					</tr>
+
+					<!-- Farhampton Farm -->
+					<tr>
+						<td id="output-canvas2" align="left"><b>Zootopia City</b><br>
+						Total cost: <span id="tc2123" style="color:darkblue;font-weight:bold"></span><br>
+						Total benefit: <span id="tb2123" style="color:darkblue;font-weight:bold"></span><br>
+						Net benefit: <span id="nb2123" style="color:darkblue;font-weight:bold"></span><br>
+					    </td>
+					    <td></td>
+					    <td id="output-canvas3" align="left"><b>Farhampton Farm</b><br>
+						Total cost: <span id="tc3123" style="color:darkblue;font-weight:bold"></span><br>
+						Total benefit: <span id="tb3123" style="color:darkblue;font-weight:bold"></span><br>
+						Net benefit: <span id="nb3123" style="color:darkblue;font-weight:bold"></span><br>
+						</td>
+					</tr>
+
+					</tr>
+
+					<tr>
+
+					<!-- Smallville Farm -->
+					<tr>
+						<td id="output-canvas4"><b>Smallville Farm</b><br>
+						Total cost: <span id="tc4123" style="color:darkblue;font-weight:bold"></span><br>
+						Total benefit: <span id="tb4123" style="color:darkblue;font-weight:bold"></span><br>
+						Net benefit: <span id="nb4123" style="color:darkblue;font-weight:bold"></span><br>
+						</td>
+						<td id="output-canvas5" align="center" style="height: 270px"><b>Atlantis City</b><br>
+						Total cost: <span id="tc5123" style="color:darkblue;font-weight:bold"></span><br>
+						Total benefit: <span id="tb5123" style="color:darkblue;font-weight:bold"></span><br>
+						Net benefit: <span id="nb5123" style="color:darkblue;font-weight:bold"></span><br>
+					   </td>
+					   <td></td>
+					</tr>
+
+					<!-- Environmental flow -->
+					<tr>
+						<td></td>
+						<td id="output-canvas6" align="center"><b>The Narrow Sea</b><br></td>
+						<td></td>
+					</tr>
+
+					</tr><tr>
+					</tr><tr>
+
+				</table>
+
+				
+				<script>
+				////////////////////////////////////////
+				//This set the data
+				////////////////////////////////////////
+				var data = []
+				var nb_persons=14;
+				for (var i=0;i<nb_persons;i++){
+					data.push(Math.floor(Math.random()*100));
+				}
+				console.log(data)
+				////////////////////////////////////////
+
+				////////////////////////////////////////
+				//UPSTREAM DISCHARGE
+				////////////////////////////////////////
+				var svg_nb=d3.select("#output-canvas0").append("svg")
+					.attr("width","300").attr("height","140")
+					.attr("id","fillgauge0");
+				svg_nb.append("circle")
+					.attr("r", "40")
+					.attr("cx", "150")
+					.attr("cy", "70")
+					.attr("opacity","0.6")
+					.attr("fill", "#EBF7E3");
+				// create a configuration for this gauge	
+				// see examples at http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6 for different configs look and feel	
+				var config = liquidFillGaugeDefaultSettings();
+					config.minValue = 0;
+					config.maxValue = 165
+					config.textVertPosition = 0.9;
+					config.displayPercent = false;
+				// create the gauge
+				var gauge0 = loadLiquidFillGauge("fillgauge0",data[0],config);
+
+				////////////////////////////////////////
+				//1. FARM 1 - Shangri-La Farm
+				////////////////////////////////////////
+				var svg_nb=d3.select("#output-canvas1").append("svg")
+					.attr("width","200").attr("height","100")
+					.attr("id","fillgauge1");
+				svg_nb.append("circle")
+					.attr("r", "30")
+					.attr("cx", "100")
+					.attr("cy", "50")
+					.attr("opacity","0.6")
+					.attr("fill", "#EBF7E3");
+				// create the gauge
+				var gauge1 = loadLiquidFillGauge("fillgauge1",data[1],config);
+
+				////////////////////////////////////////
+				//2. CITY 1 - Zootopia City
+				////////////////////////////////////////
+				var svg_nb=d3.select("#output-canvas2").append("svg")
+					.attr("width","200").attr("height","100")
+					.attr("id","fillgauge2");
+				svg_nb.append("circle")
+					.attr("r", "30")
+					.attr("cx", "100")
+					.attr("cy", "50")
+					.attr("opacity","0.6")
+					.attr("fill", "#EBF7E3");
+				// create the gauge
+				var gauge2 = loadLiquidFillGauge("fillgauge2",data[2],config);
+
+				////////////////////////////////////////
+				//3. FARM 2 - Farhampton Farm
+				////////////////////////////////////////
+				var svg_nb=d3.select("#output-canvas3").append("svg")
+					.attr("width","200").attr("height","100")
+					.attr("id","fillgauge3");
+				svg_nb.append("circle")
+					.attr("r", "30")
+					.attr("cx", "100")
+					.attr("cy", "50")
+					.attr("opacity","0.6")
+					.attr("fill", "#EBF7E3");
+				// create the gauge
+				var gauge3 = loadLiquidFillGauge("fillgauge3",data[3],config);
+				
+				////////////////////////////////////////
+				//4. FARM 3 - Smallville Farm
+				////////////////////////////////////////
+				var svg_nb=d3.select("#output-canvas4").append("svg")
+					.attr("width","200").attr("height","100")
+					.attr("id","fillgauge4");
+				svg_nb.append("circle")
+					.attr("r", "30")
+					.attr("cx", "100")
+					.attr("cy", "50")
+					.attr("opacity","0.6")
+					.attr("fill", "#EBF7E3");
+				// create the gauge
+				var gauge4 = loadLiquidFillGauge("fillgauge4",data[4],config);
+
+				////////////////////////////////////////
+				//5. CITY 2 - Atlantis City
+				////////////////////////////////////////
+				var svg_nb=d3.select("#output-canvas5").append("svg")
+					.attr("width","200").attr("height","100")
+					.attr("id","fillgauge5");
+				svg_nb.append("circle")
+					.attr("r", "30")
+					.attr("cx", "100")
+					.attr("cy", "50")
+					.attr("opacity","0.6")
+					.attr("fill", "#EBF7E3");
+				// create the gauge
+				var gauge5 = loadLiquidFillGauge("fillgauge5",data[5],config);
+				
+				////////////////////////////////////////
+				//6. Environmental flow
+				////////////////////////////////////////
+				var svg_nb=d3.select("#output-canvas6").append("svg")
+					.attr("width","200").attr("height","100")
+					.attr("id","fillgauge6");
+				svg_nb.append("circle")
+					.attr("r", "30")
+					.attr("cx", "100")
+					.attr("cy", "50")
+					.attr("opacity","0.6")
+					.attr("fill", "#EBF7E3");
+				// create the gauge
+				var gauge6 = loadLiquidFillGauge("fillgauge6",data[6],config);				
+				/////////////////////////////////////////////	
+
+				////////////////////////////////////////
+				//These are functions that do something when clicking on an html input
+				///////////////////////////////////////
+				
+////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+var tbf1=0;
+var tbc1=0;
+var tbf2=0;
+var tbf3=0;
+var tbc2=0;
+var i = 0;
+
+function Simulate(){
+
+var v1,v2,v3,v4,v5;
+var v11 = 10;
+var v12 = 12;
+var v13 = 8;
+var v21 = 5;
+var v22 = 5;
+var v23 = 5;
+var v31 = 8;
+var v32 = 10;
+var v33 = 6;
+var v41 = 11;
+var v42 = 11;
+var v43 = 9;
+var v51 = 7;
+var v52 = 7;
+var v53 = 7;
+var v61 = 5;
+var v62 = 5;
+var v63 = 5;
+var flow1 = Math.floor((Math.random()*21)+36); // range (40 to 60)
+var flow2 = Math.floor((Math.random()*41)+30); // range (45 to 55)
+var flow3 = Math.floor((Math.random()*31)+25); // range (30 to 50)
+var flow = flow1 + flow2 + flow3;
+var fcf1 = 2;
+var fcf2 = 8;
+var fcf3 = 11;
+var fcc1= 2;
+var fcc2 = 2;
+
+document.getElementById("flow1").innerHTML = flow1;
+document.getElementById("flow2").innerHTML = flow2;
+document.getElementById("flow3").innerHTML = flow3;
+document.getElementById("flow").innerHTML = flow;
+
+//////////////////////////////////////////////////////////Farm1
+v1=Number(document.getElementById("QFarm1").value);
+var uf11= flow1;//WA month1
+var uf12= flow2;//WA month2
+var uf13= flow3;//WA month3
+var a11 = uf11*v1/100;//allocation m1
+var a12 = uf12*v1/100;//allocation m2
+var a13 = uf13*v1/100;//allocation m3
+var allocateF1 = a11+a12+a13;
+var wbm11 = a11-v11//WaterBalance m1
+var wbm12 = a12-v12//WaterBalance m1
+var wbm13 = a13-v13//WaterBalance m1
+var wcm11 = a11*2 //WaterCharge m1
+var wcm12 = a12*2 //WaterCharge m2
+var wcm13 = a13*2 //WaterCharge m3
+//Damages m1
+var dm11,dm12,dm13;
+if (wbm11<0){
+	dm11 = wbm11/v11;
+} else {
+	dm11 = 0;
+}
+//Damages m2
+if (wbm12<0){
+	dm12 = wbm12/v12;
+} else {
+	dm12 = 0;
+}
+//Damages m3
+if (wbm13<0){
+	dm13 = wbm13/v13;
+} else {
+	dm13 = 0;
+}
+//Total Yield
+var tym1123 = (dm11+dm12+dm13)/3;
+//CropBenefit
+var cbm1123 = (v11+v12+v13)*(1+tym1123)*2.5;
+//Total Cost
+var tcm1123 =10+(+wcm11+wcm12+wcm13);
+//Total Benefit
+var tbm1123 = cbm1123;
+//Net Benefit
+var nbm1123 = tbm1123 - tcm1123;
+/*
+//Display WA at us of diversion
+//document.getElementById("m11").innerHTML= uf11;
+document.getElementById("m12").innerHTML= uf12;
+document.getElementById("m13").innerHTML= uf13;
+//Display allocation
+document.getElementById("am11").innerHTML= a11;
+document.getElementById("am12").innerHTML= a12;
+document.getElementById("am13").innerHTML= a13;
+//Display WaterBalance
+document.getElementById("wb11").innerHTML= wbm11;
+document.getElementById("wb12").innerHTML= wbm12;
+document.getElementById("wb13").innerHTML= wbm13;
+//Display Water Charges
+document.getElementById("wc11").innerHTML= wcm11;
+document.getElementById("wc12").innerHTML= wcm12;
+document.getElementById("wc13").innerHTML= wcm13;
+//Display Damages
+document.getElementById("d11").innerHTML = dm11;
+document.getElementById("d12").innerHTML = dm12;
+document.getElementById("d13").innerHTML = dm13;
+//Display Total Yield
+document.getElementById("ty1123").innerHTML = tym1123;
+//Display Crop Benefit
+document.getElementById("cb1123").innerHTML = cbm1123;*/
+//Display Total Cost
+document.getElementById("tc1123").innerHTML = tcm1123.toFixed(1);
+//Display Total Benefit
+document.getElementById("tb1123").innerHTML = tbm1123.toFixed(1);
+//Display Net Benefit
+document.getElementById("nb1123").innerHTML = nbm1123.toFixed(1);
+
+///////////////////////////////////////////////////////City1
+v2=Number(document.getElementById("QCity1").value);
+var uf21= uf11*(1-v1/100);//WA month1
+var uf22= uf12*(1-v1/100);//WA month2
+var uf23= uf13*(1-v1/100);//WA month3
+var a21 = uf21*v2/100;//allocation m1
+var a22 = uf22*v2/100;//allocation m2
+var a23 = uf23*v2/100;//allocation m3
+var allocateC1 = a21+a22+a23;
+var wbm21 = a21-v21//WaterBalance m1
+var wbm22 = a22-v22//WaterBalance m1
+var wbm23 = a23-v23//WaterBalance m1
+var wcm21 = a21*2.5 //WaterCharge m1
+var wcm22 = a22*2.5 //WaterCharge m2
+var wcm23 = a23*2.5 //WaterCharge m3
+//Income of City
+var ioc21,ioc22,ioc23;
+if (a21 < v21){
+	 ioc21 = a21*3.25;
+} else {
+	ioc21 = v21*3.25;
+}
+if (a22 < v22){
+	ioc22 = a22*3.25;
+} else {
+	ioc22 = v22*3.25;
+}
+if (a23 < v23){
+	ioc23 = a23*3.25;
+} else {
+	ioc23 = v23*3.25;
+}
+//Damages
+var dm21,dm22,dm23;
+if (wbm21<0){
+	dm21 = wbm21*-3;
+} else {
+	dm21 = 0;
+}
+if (wbm22<0){
+	dm22 = wbm22*-3;
+} else {
+	dm22 = 0;
+}
+if (wbm23<0){
+	dm23 = wbm23*-3;
+} else {
+	dm23 = 0;
+}
+//Total Cost
+var tcm2123 = 2+(wcm21+wcm22+wcm23+dm21+dm22+dm23);
+//Total Benefit
+var tbm2123 = (ioc21+ioc22+ioc23);
+//Net Benefit
+var nbm2123 = tbm2123 - tcm2123;
+/*
+//WA at us of diversion
+document.getElementById("m21").innerHTML= uf21;
+document.getElementById("m22").innerHTML= uf22;
+document.getElementById("m23").innerHTML= uf23;
+//Display allocation
+document.getElementById("am21").innerHTML= a21;
+document.getElementById("am22").innerHTML= a22;
+document.getElementById("am23").innerHTML= a23;
+//Display WaterBalance
+document.getElementById("wb21").innerHTML= wbm21;
+document.getElementById("wb22").innerHTML= wbm22;
+document.getElementById("wb23").innerHTML= wbm23;
+//Display Water Charges
+document.getElementById("wc21").innerHTML= wcm21;
+document.getElementById("wc22").innerHTML= wcm22;
+document.getElementById("wc23").innerHTML= wcm23;
+//Display Income of City
+document.getElementById("i21").innerHTML = ioc21;
+document.getElementById("i22").innerHTML = ioc22;
+document.getElementById("i23").innerHTML = ioc23;
+//Display Damages
+document.getElementById("d21").innerHTML = dm21;
+document.getElementById("d22").innerHTML = dm22;
+document.getElementById("d23").innerHTML = dm23;*/
+//Display Total Cost
+document.getElementById("tc2123").innerHTML = tcm2123.toFixed(1);
+//Display Total Benefit
+document.getElementById("tb2123").innerHTML = tbm2123.toFixed(1);
+//Display Net Benefit
+document.getElementById("nb2123").innerHTML = nbm2123.toFixed(1);
+
+////////////////////////////////////////////////////////Farm2
+v3=Number(document.getElementById("QFarm2").value);
+//Water Allocation
+var uf31= uf21*(1-v2/100);//m1
+var uf32= uf22*(1-v2/100);//m2
+var uf33= uf23*(1-v2/100);//m3
+//allocation
+var a31 = uf31*v3/100;//m1
+var a32 = uf32*v3/100;//m2
+var a33 = uf33*v3/100;//m3
+var allocateF2 = a31+a32+a33;
+//WaterBalance
+var wbm31 = a31-v31//m1
+var wbm32 = a32-v32//m2
+var wbm33 = a33-v33//m3
+//WaterCharge
+var wcm31 = a31*1.5 //m1
+var wcm32 = a32*1.5 //m2
+var wcm33 = a33*1.5 //m3
+//Damages m1
+var dm31,dm32,dm33;
+if (wbm31<0){
+	dm31 = wbm31/v31;
+} else {
+	dm31 = 0;
+}
+//Damages m2
+if (wbm32<0){
+	dm32 = wbm32/v32;
+} else {
+	dm32 = 0;
+}
+//Damages m3
+if (wbm33<0){
+	dm33 = wbm33/v33;
+} else {
+	dm33 = 0;
+}
+//Total Yield
+var tym3123 = (dm31+dm32+dm33)/3;
+//CropBenefit
+var cbm3123 = (v31+v32+v33)*(1+tym3123)*2;
+//Total Cost
+var tcm3123 = 8+(wcm31+wcm32+wcm33);
+//Total Benefit
+var tbm3123 = cbm3123;
+//Net Benefit
+var nbm3123 = tbm3123 - tcm3123;
+/*
+//WA at u/s of diversion
+document.getElementById("m31").innerHTML= uf31;
+document.getElementById("m32").innerHTML= uf32;
+document.getElementById("m33").innerHTML= uf33;
+//Display allocation
+document.getElementById("am31").innerHTML= a31;
+document.getElementById("am32").innerHTML= a32;
+document.getElementById("am33").innerHTML= a33;
+//Display WaterBalance
+document.getElementById("wb31").innerHTML= wbm31;
+document.getElementById("wb32").innerHTML= wbm32;
+document.getElementById("wb33").innerHTML= wbm33;
+
+//Display Water Charges
+document.getElementById("wc31").innerHTML= wcm31;
+document.getElementById("wc32").innerHTML= wcm32;
+document.getElementById("wc33").innerHTML= wcm33;
+//Display Damages
+document.getElementById("d31").innerHTML = dm31;
+document.getElementById("d32").innerHTML = dm32;
+document.getElementById("d33").innerHTML = dm33;
+//Display Total Yield
+document.getElementById("ty3123").innerHTML = tym3123;
+//Display Crop Benefit
+document.getElementById("cb3123").innerHTML = cbm3123;*/
+//Display Total Cost
+document.getElementById("tc3123").innerHTML = tcm3123.toFixed(1);
+//Display Total Benefit
+document.getElementById("tb3123").innerHTML = tbm3123.toFixed(1);//
+//Display Net Benefit
+document.getElementById("nb3123").innerHTML = nbm3123.toFixed(1);//
+
+////////////////////////////////////////////////////////////Farm3
+v4=Number(document.getElementById("QFarm3").value);
+var uf41= uf31*(1-v3/100);//WA month1
+var uf42= uf32*(1-v3/100);//WA month2
+var uf43= uf33*(1-v3/100);//WA month3
+var a41 = uf41*v4/100;//allocation m1
+var a42 = uf42*v4/100;//allocation m2
+var a43 = uf43*v4/100;//allocation m3
+//WaterBalance
+var wbm41 = a41-v41//m1
+var wbm42 = a42-v42//m2
+var wbm43 = a43-v43//m3
+//WaterCharge
+var wcm41 = a41*1 //m1
+var wcm42 = a42*1 //m2
+var wcm43 = a43*1 //m3
+var allocateF3 = a41+a42+a43;
+//Damages m1
+var dm41,dm42,dm43;
+if (wbm41<0){
+	dm41 = wbm41/v41;
+} else {
+	dm41 = 0;
+}
+//Damages m2
+if (wbm42<0){
+	dm42 = wbm42/v42;
+} else {
+	dm42 = 0;
+}
+//Damages m3
+if (wbm43<0){
+	dm43 = wbm43/v43;
+} else {
+	dm43 = 0;
+}
+//Total Yield
+var tym4123 = (dm41+dm42+dm43)/3;
+//CropBenefit
+var cbm4123 = (v41+v42+v43)*(1+tym4123)*1.5;
+//Total Cost
+var tcm4123 = 11+(wcm41+wcm42+wcm43);
+//Total Benefit
+var tbm4123 = cbm4123;
+//Net Benefit
+var nbm4123 = tbm4123 - tcm4123;
+/*
+//WA at us of diversion
+document.getElementById("m41").innerHTML= uf41;
+document.getElementById("m42").innerHTML= uf42;
+document.getElementById("m43").innerHTML= uf43;
+//Display allocation
+document.getElementById("am41").innerHTML= a41;
+document.getElementById("am42").innerHTML= a42;
+document.getElementById("am43").innerHTML= a43;
+//Display WaterBalance
+document.getElementById("wb41").innerHTML= wbm41;
+document.getElementById("wb42").innerHTML= wbm42;
+document.getElementById("wb43").innerHTML= wbm43;
+
+//Display Water Charges
+document.getElementById("wc41").innerHTML= wcm41;
+document.getElementById("wc42").innerHTML= wcm42;
+document.getElementById("wc43").innerHTML= wcm43;
+//Display Damages
+document.getElementById("d41").innerHTML = dm41;
+document.getElementById("d42").innerHTML = dm42;
+document.getElementById("d43").innerHTML = dm43;
+//Display Total Yield
+document.getElementById("ty4123").innerHTML = tym4123;
+//Display Crop Benefit
+document.getElementById("cb4123").innerHTML = cbm4123;*/
+//Display Total Cost
+document.getElementById("tc4123").innerHTML = tcm4123.toFixed(1);
+//Display Total Benefit
+document.getElementById("tb4123").innerHTML = tbm4123.toFixed(1);//
+//Display Net Benefit
+document.getElementById("nb4123").innerHTML = nbm4123.toFixed(1);//
+
+/////////////////////////////////////////////////////////////City2
+v5=Number(document.getElementById("QCity2").value);
+//Water Allocation at U/S of Diversion
+var uf51= uf41*(1-v4/100);//m1
+var uf52= uf42*(1-v4/100);//m2
+var uf53= uf43*(1-v4/100);//m3
+var a51 = uf51*v5/100;//allocation m1
+var a52 = uf52*v5/100;//allocation m2
+var a53 = uf53*v5/100;//allocation m3
+var allocateC2 = a51+a52+a53;
+//WaterBalance
+var wbm51 = a51-v51//m1
+var wbm52 = a52-v52//m2
+var wbm53 = a53-v53//m3
+//WaterCharge
+var wcm51 = a51*1.5 //m1
+var wcm52 = a52*1.5 //m2
+var wcm53 = a53*1.5 //m3
+//Income of City
+var ioc51,ioc52,ioc53;
+if (a51 < v51){
+	 ioc51 = a51*2;
+} else {
+	ioc51 = v51*2;
+}
+if (a52 < v52){
+	ioc52 = a52*2;
+} else {
+	ioc52 = v52*2;
+}
+if (a53 < v53){
+	ioc53 = a53*2;
+} else {
+	ioc53 = v53*2;
+}
+//Damages
+var dm51,dm52,dm53;
+if (wbm51<0){
+	dm51 = wbm51*-2;
+} else {
+	dm51 = 0;
+}
+if (wbm51<0){
+	dm52 = wbm52*-2;
+} else {
+	dm52 = 0;
+}
+if (wbm51<0){
+	dm53 = wbm53*-2;
+} else {
+	dm53 = 0;
+}
+//Total Cost
+var tcm5123 = 2+(wcm51+wcm52+wcm53+dm51+dm52+dm53);
+//Total Benefit
+var tbm5123 = (ioc51+ioc52+ioc53);
+//Net Benefit
+var nbm5123 = tbm5123 - tcm5123;
+/*
+//WA at us of diversion
+document.getElementById("m51").innerHTML= uf51;
+document.getElementById("m52").innerHTML= uf52;
+document.getElementById("m53").innerHTML= uf53;
+//Display allocation
+document.getElementById("am51").innerHTML= a51;
+document.getElementById("am52").innerHTML= a52;
+document.getElementById("am53").innerHTML= a53;
+//Display WaterBalance
+document.getElementById("wb51").innerHTML= wbm51;
+document.getElementById("wb52").innerHTML= wbm52;
+document.getElementById("wb53").innerHTML= wbm53;
+//Display Water Charges
+document.getElementById("wc51").innerHTML= wcm51;
+document.getElementById("wc52").innerHTML= wcm52;
+document.getElementById("wc53").innerHTML= wcm53;
+//Display Income of City
+document.getElementById("i51").innerHTML = ioc51;
+document.getElementById("i52").innerHTML = ioc52;
+document.getElementById("i53").innerHTML = ioc53;
+//Display Damages
+document.getElementById("d51").innerHTML = dm51;
+document.getElementById("d52").innerHTML = dm52;
+document.getElementById("d53").innerHTML = dm53;*/
+//Display Total Cost
+document.getElementById("tc5123").innerHTML = tcm5123.toFixed(1);
+//Display Total Benefit
+document.getElementById("tb5123").innerHTML = tbm5123.toFixed(1);
+//Display Net Benefit
+document.getElementById("nb5123").innerHTML = nbm5123.toFixed(1);
+
+if(flow>150){
+	document.getElementById("weather").innerHTML= "Wet";
+} else if (flow<115){
+	document.getElementById("weather").innerHTML= "Drought";
+} else {
+	document.getElementById("weather").innerHTML= "Normal";
+}
+
+var ip6 = 100;
+
+//////////////////////////////////////////////////////////////Environmental Flow
+/*v6=Number(document.getElementById("ip6").value);*/
+var uf61= uf51*(1-v5/100);//WA month1
+var uf62= uf52*(1-v5/100);//WA month2
+var uf63= uf53*(1-v5/100);//WA month3
+var am61 = uf61*100/100;//allocation m1
+var am62 = uf62*100/100;//allocation m2
+var am63 = uf63*100/100;//allocation m3
+var allocateE1 = am61+am62+am63;
+//WaterBalance
+var wbm61 = am61-v61//m1
+var wbm62 = am62-v62//m2
+var wbm63 = am63-v63//m3
+/*
+//WA at us of diversion 
+document.getElementById("m61").innerHTML= uf61;
+document.getElementById("m62").innerHTML= uf62;
+document.getElementById("m63").innerHTML= uf63;
+//Display allocation
+document.getElementById("a61").innerHTML= am61;
+document.getElementById("a62").innerHTML= am62;
+document.getElementById("a63").innerHTML= am63;
+//Display WaterBalance
+document.getElementById("wb61").innerHTML= wbm61;
+document.getElementById("wb62").innerHTML= wbm62;
+document.getElementById("wb63").innerHTML= wbm63;*/
+
+					// update data
+					gauge0.update(flow); <!--update upstream flow-->
+					gauge1.update(allocateF1);
+					gauge2.update(allocateC1);
+					gauge3.update(allocateF2);
+					gauge4.update(allocateF3);
+					gauge5.update(allocateC2);
+					gauge6.update(allocateE1);
+					changeWeatherImage(flow);
+tbf1 =tbf1 + nbm1123;
+tbc1 = tbc1 + nbm2123 ;
+tbf2 = tbf2 + nbm3123;
+tbf3 = tbf3 + nbm4123;
+tbc2 = tbc2 + nbm5123;					
+i++;
+				
+document.getElementById("cbenefit1").innerHTML = tbf1.toFixed(1);
+document.getElementById("cbenefit2").innerHTML = tbc1.toFixed(1);
+document.getElementById("cbenefit3").innerHTML = tbf2.toFixed(1);
+document.getElementById("cbenefit4").innerHTML = tbf3.toFixed(1);
+document.getElementById("cbenefit5").innerHTML = tbc2.toFixed(1);
+document.getElementById("round").innerHTML = i;
+
+/*
+if (tbf1>tbc1&&tbf1>tbf2&&tbf1>tbf3&&tbf1>tbc2){
+			document.getElementById("winner").innerHTML="Shangri-La Farm";
+		}else if (tbf2>tbc1&&tbf2>tbf1&&tbf2>tbf3&&tbf2>tbc2){
+			document.getElementById("winner").innerHTML="Farmhampton";
+		}else if (tbf3>tbc1&&tbf3>tbf1&&tbf3>tbf2&&tbf3>tbc2){
+			document.getElementById("winner").innerHTML="Smallville";
+		}else if (tbc1>tbf1&&tbc1>tbf2&&tbc1>tbf3&&tbc1>tbc2){
+			document.getElementById("winner").innerHTML="zootopia";
+		}else if (tbc2>tbc1&&tbc2>tbf1&&tbc2>tbf2&&tbc2>tbf3){
+			document.getElementById("winner").innerHTML="Atlantis";
+		}
+*/
+
+if (i>5){
+	alert("You have Finished 5 Rounds!!!\nClick 'OK' to play again...\nEnjoy the Game!!!");
+	location.reload();
+}
+}
+	
+</script>	
+
+			</div> 
+	</div>
+
+
+	<br>
+	<!-- Table for FOOTER-->
+	<!-- 
+	<div id="footer">
+		[footer]
+	</div>-->
+	<div id="copyrightfooter">
+		<p align="center">&copy;2018 Powered by WSE/HI Dev Team</p>
+	</div>
+
+</div>
+</body>
+</html>
