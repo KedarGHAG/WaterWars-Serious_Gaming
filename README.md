@@ -1,4 +1,4 @@
 # WaterWars-Serious_Gaming
-<h1>A serious game built to understand the water resource allocation in a watershed.</h1>
+<strong>A serious game built to understand the water resource allocation in a watershed.</strong>
 
 <a href="WaterWars_GUI.JPG"></a>
