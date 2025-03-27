@@ -18,6 +18,6 @@
 </H4>
 <p>
     <strong>
-        <i>WaterWars: a Serious Gaming tool</i> is developed during the third edition of the “Serious Gaming for the Water Sector” summer course at IHE-Delft, Delft, The Netherlands. The list of contributors in the making of this game is as follows (alphabatical order): Colis Nicolas Allen, Dianah Nasasira, Kedar Surendranath Ghag, Neela Mathare, Quang Phuoc Phung, Tanvir Ahmed.  
+        <i>WaterWars: a Serious Gaming tool</i> is developed during the third edition of the “Serious Gaming for the Water Sector” summer course during August 2018 by Joanne Craven and other staff mebers at IHE-Delft, Delft, The Netherlands. The list of contributors in the making of this game is as follows (alphabatical order): Colis Nicolas Allen (Guyana), Dianah Nasasira (Uganda), Kedar Surendranath Ghag (India), Neela Mathare (India), Quang Phuoc Phung (Vietnam), Tanvir Ahmed (Bangladesh).
     </strong>
 </p>
